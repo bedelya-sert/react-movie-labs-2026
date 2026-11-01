@@ -12,10 +12,10 @@ const App = () => {
     <BrowserRouter>
       <SiteHeader />
       <Routes>
-        <Route path="/reviews/:id" element={ <MovieReviewPage /> } />
         <Route path="/movies/favorites" element={<FavoriteMoviesPage />} />
         <Route path="/movies/upcoming" element={<UpcomingMoviesPage />} />
         <Route path="/movies/:id" element={<MoviePage />} />
+        <Route path="/reviews/:id" element={ <MovieReviewPage /> } />
         <Route path="/" element={<HomePage />} />
         <Route path="*" element={ <Navigate to="/" /> } />
       </Routes>
