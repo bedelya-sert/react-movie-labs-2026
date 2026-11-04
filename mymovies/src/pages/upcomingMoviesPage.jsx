@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import PageTemplate from "../components/templateMovieListPage";
+import AddToWatchListIcon from "../components/cardIcons/addToWatchList";
 import { getUpcomingMovies } from "../api/tmdb-api";
 
 const UpcomingMoviesPage = () => {
@@ -30,6 +31,7 @@ const UpcomingMoviesPage = () => {
       title="Upcoming Movies"
       movies={upcomingMovies}
       selectFavorite={addToFavorites}
+      action={(movie)=> <AddToWatchListIcon movie={movie} />}
     />
   );
 };
