@@ -36,7 +36,7 @@ const TemplateMoviePage = ({ movie, children }) => {
           }}>
             <ImageList
                 sx={{
-                    height: "100vh",
+                    height: "400vh",  //Fill that big gaping space along the side, it looks dreadful :/
                 }}
                 cols={1}
             >

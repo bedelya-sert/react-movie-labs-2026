@@ -47,6 +47,11 @@ export const getMovieRecommendations = ({ queryKey }) => {
   return tmdbFetch(`/movie/${id}/recommendations`, {language: "en-US", page:1});
 }; //Get the recommendations for a movie with said ID
 
+export const getMovieCredits = ({ queryKey }) => {
+  const [, {id}] = queryKey;
+  return tmdbFetch(`/movie/${id}/credits`, {language: "en-US", page:1});
+}; //Get the credits of a specific movie (id)
+
 const getMovieList = (listType) => tmdbFetch(`/movie/${listType}`, {language: "en-US", page: 1});
 
 export const getUpcomingMovies = () => getMovieList("upcoming");

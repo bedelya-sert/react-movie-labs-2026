@@ -5,7 +5,7 @@ import { getMovie } from '../api/tmdb-api'
 import { useQuery } from '@tanstack/react-query';
 import Spinner from '../components/spinner'
 import MovieRecommendations from '../components/movieRecommendations';
-// import useMovie from "../hooks/useMovie";   Redundant
+import MovieCast from "../components/movieCast"
 
 const MoviePage = () => { //Removed redundant props
   const { id } = useParams();
@@ -28,6 +28,7 @@ const MoviePage = () => { //Removed redundant props
         <>
           <PageTemplate movie={movie}>
             <MovieDetails movie={movie} />
+            <MovieCast movie={movie} /> {/* Our movies can finally display the main cast now! */}
             <MovieRecommendations movie={movie} />
           </PageTemplate>
         </>
