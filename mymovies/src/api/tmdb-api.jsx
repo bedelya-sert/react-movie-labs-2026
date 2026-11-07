@@ -1,3 +1,22 @@
+const BASE_URL = "https://api.themoviedb.org/3";
+
+//Added this to consolidate all fetch requests used into one function as there was a lot of repeated code blocks
+const tmdbFetch = (path, params = {}) => { //No need to export this bec it only ever gets used within this api
+  const query = new URLSearchParams({
+    api_key: import.meta.env.VITE_TMDB_KEY,
+    ...params,
+  });
+
+  return fetch(`${BASE_URL}${path}?${query}`).then((response) => {
+    if (!response.ok) {
+      return response.json().then((error) => {
+        throw new Error(error.status_message || "Something went wrong");
+      });
+    }
+    return response.json();
+  });
+};
+
 export const getMovies = () => {
   return fetch(
     `https://api.themoviedb.org/3/discover/movie?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=1`
@@ -86,6 +105,11 @@ export const getMovie = (args) => {
       throw error
    });
   };
+
+export const getMovieRecommendations = ({ queryKey }) => {
+  const [, {id}] = queryKey;
+  return tmdbFetch(`/movie/${id}/recommendations`, {language: "en-US", page:1});
+}; //Get the recommendations for a movie with said ID
 
 const handleResponse = (response) =>{
   if(!response.ok){

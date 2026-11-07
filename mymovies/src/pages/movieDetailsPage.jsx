@@ -4,9 +4,10 @@ import PageTemplate from "../components/templateMoviePage";
 import { getMovie } from '../api/tmdb-api'
 import { useQuery } from '@tanstack/react-query';
 import Spinner from '../components/spinner'
+import MovieRecommendations from '../components/movieRecommendations';
 // import useMovie from "../hooks/useMovie";   Redundant
 
-const MoviePage = (props) => {
+const MoviePage = () => { //Removed redundant props
   const { id } = useParams();
   const { data: movie, error, isPending, isError  } = useQuery({
     queryKey: ['movie', {id: id}],
@@ -27,6 +28,7 @@ const MoviePage = (props) => {
         <>
           <PageTemplate movie={movie}>
             <MovieDetails movie={movie} />
+            <MovieRecommendations movie={movie} />
           </PageTemplate>
         </>
       ) : (
