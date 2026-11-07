@@ -30,6 +30,16 @@ export const getMovie = ({queryKey}) => {
    return tmdbFetch(`/movie/${id}`);
   }
 
+export const getPerson = ({queryKey}) => {
+   const [, {id}] = queryKey;
+   return tmdbFetch(`/person/${id}`, {language: "en-US"});
+  }  //Get an actor as an object
+
+export const getPersonMovieCredits = ({queryKey}) => {
+   const [, {id}] = queryKey;
+   return tmdbFetch(`/person/${id}/movie_credits`, {language: "en-US"});
+  } //Get the movies list the actor has worked on
+
   export const getGenres = () => tmdbFetch("/genre/movie/list", {language: "en-US"});
 
   export const getMovieImages = ({ queryKey }) => {
