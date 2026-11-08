@@ -11,6 +11,7 @@ import { useNavigate } from "react-router";
 import { styled } from '@mui/material/styles';
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import NavDropdown from "../navDropdown";
 
 const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
@@ -25,12 +26,24 @@ const SiteHeader = () => {
 
   const menuOptions = [
     { label: "Home", path: "/" },
-    { label: "Favorites", path: "/movies/favorites" },
-    { label: "Upcoming", path: "/movies/upcoming" },
-    { label: "Popular", path: "/movies/popular" },
-    { label: "Top Rated", path:"/movies/top_rated"},
-    { label: "Now Playing", path:"/movies/now_playing"},
-    { label: "Must Watch List", path:"/movies/must_watch"}
+    { label: "Browse",
+      items: [
+        { label: "Popular", path:"/movies/popular"},
+        { label: "Top Rated", path:"/movies/top_rated"}
+      ] 
+    },
+     { label: "In Cinemas",
+      items: [
+         { label: "Upcoming", path: "/movies/upcoming" },
+         { label: "Now Playing", path:"/movies/now_playing"}
+      ] 
+    },
+    { label: "Personal",
+      items: [
+          { label: "Favourites", path:"/movies/favourites"},
+          { label: "Must Watch List", path:"/movies/must_watch"}
+      ] 
+    },
   ];
 
   const handleMenuSelect = (pageURL) => {
@@ -41,6 +54,8 @@ const SiteHeader = () => {
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
+ //references taken from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flatMap
+  const mobileOptions = menuOptions.flatMap((opt) => (opt.items ? opt.items : [opt]));
 
   return (
     <>
@@ -78,19 +93,19 @@ const SiteHeader = () => {
                   open={open}
                   onClose={() => setAnchorEl(null)}
                 >
-                  {menuOptions.map((opt) => (
-                    <MenuItem
-                      key={opt.label}
-                      onClick={() => handleMenuSelect(opt.path)}
-                    >
+                  {mobileOptions.map((opt) => (
+                    <MenuItem key={opt.label} onClick={() => handleMenuSelect(opt.path)}>
                       {opt.label}
                     </MenuItem>
                   ))}
                 </Menu>
               </>
             ) : (
-              <>
-                {menuOptions.map((opt) => (
+              <> {/* Check whether the option is a group or not and display the menu as a dropdown or not accordingly*/}
+                {menuOptions.map((opt) => 
+                  opt.items ? (
+                    <NavDropdown key={opt.label} label={opt.label} items={opt.items} />
+                  ) : (
                   <Button
                     key={opt.label}
                     color="inherit"

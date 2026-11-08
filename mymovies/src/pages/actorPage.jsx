@@ -11,6 +11,7 @@ import img from "../images/film-poster-placeholder.png";
 const ActorPage = () => {
  const {id} = useParams();
 
+ //For reference https://tanstack.com/query/latest/docs/framework/react/guides/caching#basic-example
   const { data: person, error, isPending, isError  } = useQuery({
       queryKey: ['person', {id}],
       queryFn: getPerson,
@@ -46,6 +47,7 @@ const ActorPage = () => {
  .sort(( a, b) => b.popularity - a.popularity)
  .slice( 0, 12);
 
+ //Also for TMDB actor details -> https://developer.themoviedb.org/reference/person-details
   return (
     <Box sx={{ p: 3}}>
         <Grid container spacing={4}>
