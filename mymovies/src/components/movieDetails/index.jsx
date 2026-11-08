@@ -9,6 +9,8 @@ import Typography from "@mui/material/Typography";
 import { useState } from "react";
 import Drawer from "@mui/material/Drawer";
 import MovieReviews from "../movieReviews"
+import { Divider } from "@mui/material";
+import Box from "@mui/material/Box";
 
 
 const root = {
@@ -33,8 +35,8 @@ const [drawerOpen, setDrawerOpen] = useState(false);
       <Typography variant="h6" component="p">
         {movie.overview}
       </Typography>
-
-      <Paper 
+    <Paper sx={{ mt: 2, overflow: "hidden"}}> {/*This was changed to fix the rounded corners making the whole second description look very obv like 3 separate components */}
+      <Box 
         component="ul" 
         sx={{...root}}
       >
@@ -46,8 +48,9 @@ const [drawerOpen, setDrawerOpen] = useState(false);
             <Chip label={g.name} sx={{...chip}} />
           </li>
         ))}
-      </Paper>
-      <Paper component="ul" sx={{...root}}>
+      </Box>
+      <Divider />
+      <Box component="ul" sx={{...root}}>
         <Chip icon={<AccessTimeIcon />} label={`${movie.runtime} min.`} />
         <Chip
           icon={<MonetizationIcon />}
@@ -58,8 +61,9 @@ const [drawerOpen, setDrawerOpen] = useState(false);
           label={`${movie.vote_average} (${movie.vote_count})`}
         />
         <Chip label={`Released: ${movie.release_date}`} />
-      </Paper>
-       <Paper 
+      </Box>
+      <Divider />
+       <Box 
         component="ul" 
         sx={{...root}}
       >
@@ -71,6 +75,7 @@ const [drawerOpen, setDrawerOpen] = useState(false);
             <Chip label={g.name} sx={{...chip}} />
           </li>
         ))}
+      </Box>
       </Paper>
             <Fab
         color="secondary"

@@ -56,7 +56,8 @@ export default function FilterMoviesCard(props) {
   return (
     <Card 
       sx={{
-        backgroundColor: "rgb(204, 204, 0)"
+        backgroundColor: "primary.light",
+        color: "primary.sub",
       }} 
       variant="outlined">
       <CardContent>
@@ -73,9 +74,19 @@ export default function FilterMoviesCard(props) {
             value={props.titleFilter}
             onChange={handleTextChange}
           />
-
+          {/*Fixed genre clipping into the select box below. */}
+       <Typography 
+            id="genre-label"
+            sx={{
+              color: "primary.sub",
+              "&.Mui-focused": { color: "primary.sub"},
+              px: 0.75,
+              borderRadius: 1,
+            }}
+            >
+            Genre
+        </Typography>
         <FormControl sx={{...formControl}}>
-          <InputLabel id="genre-label">Genre</InputLabel>
             <Select
               labelId="genre-label"
               id="genre-select"
@@ -99,13 +110,6 @@ export default function FilterMoviesCard(props) {
         image={img}
         title="Filter"
       />
-      <CardContent>
-        <Typography variant="h5" component="h1">
-          <SearchIcon fontSize="large" />
-          Filter the movies.
-          <br />
-        </Typography>
-      </CardContent>
-    </Card>
+    </Card> //Removed repeated redundant code
   );
 }

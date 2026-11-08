@@ -29,9 +29,12 @@ const MovieHeader = (props) => {
         {movie.title}
         <a href={movie.homepage}>
           <HomeIcon color="primary" />
-        </a>
-        <br />
-        <span sx={{ fontSize: "1.5rem" }}>{`   "${movie.tagline}"`} </span>
+        </a> {/*Fixed the confusing title issue, the tagline looked like it was part of the title previously */}
+        <Typography 
+          component="span"
+          sx={{ display: "block", fontSize: "1.5rem" }}>
+          "{movie.tagline}"
+        </Typography>
       </Typography>
 
       <IconButton aria-label="go forward" onClick={() => navigate(+1) } >

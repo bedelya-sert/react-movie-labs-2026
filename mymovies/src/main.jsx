@@ -15,6 +15,9 @@ import TopRatedMoviesPage from "./pages/topRatedMoviesPage";
 import NowPlayingPage from "./pages/nowPlayingPage"
 import MustWatchPage from "./pages/mustWatchPage";
 import ActorPage from "./pages/actorPage";
+import { ThemeProvider } from "@emotion/react";
+import { CssBaseline } from "@mui/material";
+import theme from "./theme";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -28,6 +31,8 @@ const queryClient = new QueryClient({
 
 const App = () => {
   return (
+  <ThemeProvider theme={theme}>
+    <CssBaseline />
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <SiteHeader />
@@ -50,6 +55,7 @@ const App = () => {
       </BrowserRouter>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
+  </ThemeProvider>
   );
 };
 
